@@ -12,9 +12,16 @@ namespace Translation_of_fractional_numbers
 {
     public partial class DefaultUserMainForm : Form
     {
+        private string currentLine;
+
         public DefaultUserMainForm()
         {
             InitializeComponent();
+        }
+
+        public DefaultUserMainForm(string currentLine)
+        {
+            this.currentLine = currentLine;
         }
     }
 }

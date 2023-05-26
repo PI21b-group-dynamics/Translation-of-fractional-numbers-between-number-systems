@@ -8,3 +8,16 @@ D:\4. Universe\Групповая Динамика\Translation-of-fractional-num
 D:\4. Universe\Групповая Динамика\Translation-of-fractional-numbers-between-number-systems\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation-of-fractional-numbers.csproj.CoreCompileInputs.cache
 D:\4. Universe\Групповая Динамика\Translation-of-fractional-numbers-between-number-systems\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation-of-fractional-numbers.exe
 D:\4. Universe\Групповая Динамика\Translation-of-fractional-numbers-between-number-systems\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation-of-fractional-numbers.pdb
+D:\Университет\ГДиК\Translation-of-fractional-numbers\Translation-of-fractional-numbers\bin\Debug\Translation-of-fractional-numbers.exe.config
+D:\Университет\ГДиК\Translation-of-fractional-numbers\Translation-of-fractional-numbers\bin\Debug\Translation-of-fractional-numbers.exe
+D:\Университет\ГДиК\Translation-of-fractional-numbers\Translation-of-fractional-numbers\bin\Debug\Translation-of-fractional-numbers.pdb
+D:\Университет\ГДиК\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation-of-fractional-numbers.csproj.AssemblyReference.cache
+D:\Университет\ГДиК\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation-of-fractional-numbers.csproj.SuggestedBindingRedirects.cache
+D:\Университет\ГДиК\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation_of_fractional_numbers.Properties.Resources.resources
+D:\Университет\ГДиК\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation_numbers.RegistrationForm.resources
+D:\Университет\ГДиК\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation-of-fractional-numbers.csproj.GenerateResource.cache
+D:\Университет\ГДиК\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation-of-fractional-numbers.csproj.CoreCompileInputs.cache
+D:\Университет\ГДиК\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation-of-fractional-numbers.exe
+D:\Университет\ГДиК\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation-of-fractional-numbers.pdb
+D:\Университет\ГДиК\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation_numbers.AuthForm.resources
+D:\Университет\ГДиК\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation_of_fractional_numbers.AdministratorMainForm.resources

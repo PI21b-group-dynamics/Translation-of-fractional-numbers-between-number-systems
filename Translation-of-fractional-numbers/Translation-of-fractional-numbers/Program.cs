@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Translation_numbers;
 
 namespace Translation_of_fractional_numbers
 {
@@ -16,7 +17,7 @@ namespace Translation_of_fractional_numbers
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AdministratorMainForm());
+            Application.Run(new AuthForm());
         }
     }
 }
