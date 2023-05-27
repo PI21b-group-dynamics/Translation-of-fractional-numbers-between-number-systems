@@ -28,15 +28,6 @@ namespace Translation_of_fractional_numbers
 
         }
 
-        private void UpdateUserData(string login, string password, string name, string surname)
-        {
-            using (StreamWriter sw = new StreamWriter($"Users\\{login}.txt"))
-            {
-                sw.Write($"{login}\n{password}\n{name}\n{surname}\n{false}\n");
-                sw.Close();
-            }
-        }
-
         private void LoadUserData(string userLogin)
         {
             if (!File.Exists($"Users\\{userLogin}Info.txt"))
@@ -67,6 +58,8 @@ namespace Translation_of_fractional_numbers
         private void editButton_Click(object sender, EventArgs e)
         {
             new ProfileEditForm(userLoginBox.Text, userPasswordBox.Text, userNameBox.Text, userSurnameBox.Text, false).ShowDialog();
+            profileEditCount.Text = (Int32.Parse(warningsCount.Text) + 1).ToString();
+            UpdateUserInfo(translateCountLabel.Text, profileEditCount.Text, warningsCount.Text, _currentUser);
             LoadUserData(userLoginBox.Text);
         }
 

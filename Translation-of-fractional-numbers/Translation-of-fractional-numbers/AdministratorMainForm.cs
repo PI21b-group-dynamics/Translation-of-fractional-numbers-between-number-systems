@@ -122,7 +122,12 @@ namespace Translation_of_fractional_numbers
 
         private void editButton_Click(object sender, EventArgs e)
         {
-            new ProfileEditForm(userLoginBox.Text, userPasswordBox.Text, userNameBox.Text, userSurnameBox.Text, false).ShowDialog();
+            if (_currentUser == "admin")
+                MessageBox.Show("Главный администратор не может редактировать свои данные", "Ошибка редактирования", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+            new ProfileEditForm(userLoginBox.Text, userPasswordBox.Text, userNameBox.Text, userSurnameBox.Text, true).ShowDialog();
+            profileEditCount.Text = (Int32.Parse(warningsCount.Text) + 1).ToString();
+            UpdateUserInfo(translateCountLabel.Text, profileEditCount.Text, warningsCount.Text, _currentUser);
             LoadUserAdminData(userLoginBox.Text);
         }
 

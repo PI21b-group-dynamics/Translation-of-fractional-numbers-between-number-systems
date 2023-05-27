@@ -9,6 +9,7 @@ namespace Translation_of_fractional_numbers
         private string _currentUser;
         private string _password;
         private bool _admin;
+        public bool changes;
 
         public ProfileEditForm()
         {
@@ -18,7 +19,7 @@ namespace Translation_of_fractional_numbers
         public ProfileEditForm(string login, string password, string name, string surname, bool admin)
         {
             InitializeComponent();
-
+            changes = 0;
             editNameBox.Text = name;
             EditSurnameBox.Text = surname;
             editLoginBox.Text = login;
