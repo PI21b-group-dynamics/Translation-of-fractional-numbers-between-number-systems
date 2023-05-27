@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Translation_of_fractional_numbers;
 
@@ -38,29 +32,50 @@ namespace Translation_numbers
             {
                 Hide();
                 new AdministratorMainForm("admin").ShowDialog();
-                Close();
+                Show();
+                return;
             }
 
-            if (File.Exists($"Users\\{userLoginBox.Text}"))
+            string login = TryLogin();
+            if (login == "")
             {
-                using (StreamReader sr = new StreamReader($"Users\\{userLoginBox.Text}"))
+                MessageBox.Show("Пользователь с такими данными не найден, создайте учётную запись.", "Ошибка входа", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (login == "False")
+            {
+                new DefaultUserMainForm(userLoginBox.Text).ShowDialog();
+            }
+            else
+            {
+                new AdministratorMainForm(userLoginBox.Text).ShowDialog();
+            }
+
+        }
+
+        private string TryLogin()
+        {
+            if (File.Exists($"Users\\{userLoginBox.Text}.txt"))
+            {
+                using (StreamReader sr = new StreamReader($"Users\\{userLoginBox.Text}.txt"))
                 {
-                    while (sr.Peek() >= 0)
+                    while (sr.Peek() > 0)
                     {
                         string currentLine = sr.ReadLine();
-                        if (currentLine.Contains($"{userLoginBox.Text} {userPasswordBox.Text}"))
+                        if (currentLine.Contains($"{userLoginBox.Text}") && sr.ReadLine().Contains($"{userPasswordBox.Text}"))
                         {
-                            Hide();
+                            sr.ReadLine();
+                            sr.ReadLine();
+                            currentLine = sr.ReadLine();
                             if (currentLine.Contains("False"))
-                                new DefaultUserMainForm(userLoginBox.Text).ShowDialog();
-                            else new AdministratorMainForm(userLoginBox.Text).ShowDialog();
-                            Close();
+                                return "False";
+                            else return "True";
                         }
                     }
                 }
-            }          
-
-            MessageBox.Show("Пользователь с такими данными не найден, создайте учётную запись.", "Ошибка входа", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            return "";
         }
 
         private void userLoginBox_Enter(object sender, EventArgs e)

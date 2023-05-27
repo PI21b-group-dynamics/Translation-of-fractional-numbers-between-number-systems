@@ -47,6 +47,8 @@ namespace Translation_numbers
                     {
                         using (StreamWriter sw = new StreamWriter($"Users\\{userLoginBox.Text}.txt", true))
                             sw.Write($"{userLoginBox.Text}\n{userPasswordBox.Text}\n{userNameBox.Text}\n{userSurnameBox.Text}\n{false}\n");
+                        MessageBox.Show("Регистрация прошла успешно.", "Уведомление", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Close();
                     }
                     else MessageBox.Show("Пользователь с таким логином уже существует.", "Ошибка заполнения", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }

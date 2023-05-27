@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.exitButton = new System.Windows.Forms.Button();
@@ -66,17 +65,20 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.addNewAdmin = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label20 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.addNewAdmin = new System.Windows.Forms.Button();
+            this.label21 = new System.Windows.Forms.Label();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -100,6 +102,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabPage1.Controls.Add(this.label21);
             this.tabPage1.Controls.Add(this.exitButton);
             this.tabPage1.Controls.Add(this.downloadTest);
             this.tabPage1.Controls.Add(this.clearFields);
@@ -131,6 +134,7 @@
             this.exitButton.TabIndex = 12;
             this.exitButton.Text = "Выход";
             this.exitButton.UseVisualStyleBackColor = true;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // downloadTest
             // 
@@ -142,6 +146,7 @@
             this.downloadTest.TabIndex = 11;
             this.downloadTest.Text = "Загрузить тестовый пример";
             this.downloadTest.UseVisualStyleBackColor = true;
+            this.downloadTest.Click += new System.EventHandler(this.downloadTest_Click);
             // 
             // clearFields
             // 
@@ -153,6 +158,7 @@
             this.clearFields.TabIndex = 10;
             this.clearFields.Text = "Очистить поля";
             this.clearFields.UseVisualStyleBackColor = true;
+            this.clearFields.Click += new System.EventHandler(this.clearFields_Click);
             // 
             // resultBox
             // 
@@ -238,6 +244,7 @@
             this.numberForTranslateBox.Size = new System.Drawing.Size(93, 24);
             this.numberForTranslateBox.TabIndex = 3;
             this.numberForTranslateBox.TextChanged += new System.EventHandler(this.numberForTranslateBox_TextChanged);
+            this.numberForTranslateBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberForTranslateBox_KeyPress);
             // 
             // label3
             // 
@@ -306,7 +313,7 @@
             // warningsCount
             // 
             this.warningsCount.AutoSize = true;
-            this.warningsCount.Location = new System.Drawing.Point(567, 186);
+            this.warningsCount.Location = new System.Drawing.Point(581, 188);
             this.warningsCount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.warningsCount.Name = "warningsCount";
             this.warningsCount.Size = new System.Drawing.Size(42, 20);
@@ -326,7 +333,7 @@
             // profileEditCount
             // 
             this.profileEditCount.AutoSize = true;
-            this.profileEditCount.Location = new System.Drawing.Point(577, 140);
+            this.profileEditCount.Location = new System.Drawing.Point(598, 139);
             this.profileEditCount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.profileEditCount.Name = "profileEditCount";
             this.profileEditCount.Size = new System.Drawing.Size(42, 20);
@@ -346,7 +353,7 @@
             // translateCountLabel
             // 
             this.translateCountLabel.AutoSize = true;
-            this.translateCountLabel.Location = new System.Drawing.Point(517, 95);
+            this.translateCountLabel.Location = new System.Drawing.Point(530, 95);
             this.translateCountLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.translateCountLabel.Name = "translateCountLabel";
             this.translateCountLabel.Size = new System.Drawing.Size(42, 20);
@@ -377,7 +384,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label12.Location = new System.Drawing.Point(518, 15);
+            this.label12.Location = new System.Drawing.Point(532, 15);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(54, 18);
@@ -388,7 +395,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label13.Location = new System.Drawing.Point(366, 15);
+            this.label13.Location = new System.Drawing.Point(380, 15);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(148, 18);
@@ -404,12 +411,14 @@
             this.exitBtn.TabIndex = 10;
             this.exitBtn.Text = "Выход";
             this.exitBtn.UseVisualStyleBackColor = true;
+            this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
             // 
             // userPasswordBox
             // 
             this.userPasswordBox.Location = new System.Drawing.Point(178, 184);
             this.userPasswordBox.Margin = new System.Windows.Forms.Padding(2);
             this.userPasswordBox.Name = "userPasswordBox";
+            this.userPasswordBox.ReadOnly = true;
             this.userPasswordBox.Size = new System.Drawing.Size(104, 26);
             this.userPasswordBox.TabIndex = 9;
             // 
@@ -418,6 +427,7 @@
             this.userLoginBox.Location = new System.Drawing.Point(178, 136);
             this.userLoginBox.Margin = new System.Windows.Forms.Padding(2);
             this.userLoginBox.Name = "userLoginBox";
+            this.userLoginBox.ReadOnly = true;
             this.userLoginBox.Size = new System.Drawing.Size(104, 26);
             this.userLoginBox.TabIndex = 8;
             // 
@@ -426,6 +436,7 @@
             this.userSurnameBox.Location = new System.Drawing.Point(178, 95);
             this.userSurnameBox.Margin = new System.Windows.Forms.Padding(2);
             this.userSurnameBox.Name = "userSurnameBox";
+            this.userSurnameBox.ReadOnly = true;
             this.userSurnameBox.Size = new System.Drawing.Size(104, 26);
             this.userSurnameBox.TabIndex = 7;
             // 
@@ -434,6 +445,7 @@
             this.userNameBox.Location = new System.Drawing.Point(178, 50);
             this.userNameBox.Margin = new System.Windows.Forms.Padding(2);
             this.userNameBox.Name = "userNameBox";
+            this.userNameBox.ReadOnly = true;
             this.userNameBox.Size = new System.Drawing.Size(104, 26);
             this.userNameBox.TabIndex = 6;
             // 
@@ -513,26 +525,31 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Администрирование";
             // 
+            // addNewAdmin
+            // 
+            this.addNewAdmin.Location = new System.Drawing.Point(218, 332);
+            this.addNewAdmin.Margin = new System.Windows.Forms.Padding(2);
+            this.addNewAdmin.Name = "addNewAdmin";
+            this.addNewAdmin.Size = new System.Drawing.Size(243, 28);
+            this.addNewAdmin.TabIndex = 28;
+            this.addNewAdmin.Text = "Сделать администратором";
+            this.addNewAdmin.UseVisualStyleBackColor = true;
+            this.addNewAdmin.Click += new System.EventHandler(this.addNewAdmin_Click);
+            // 
             // dataGridView1
             // 
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
+            this.Column7,
+            this.Column8,
+            this.Column2,
+            this.Column3,
             this.Column6,
             this.Column5,
-            this.Column4,
-            this.Column2,
-            this.Column3});
+            this.Column4});
             this.dataGridView1.GridColor = System.Drawing.Color.Gainsboro;
             this.dataGridView1.Location = new System.Drawing.Point(8, 38);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
@@ -548,7 +565,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(4, 7);
+            this.label20.Location = new System.Drawing.Point(5, 9);
             this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(347, 20);
@@ -577,16 +594,16 @@
             this.label19.TabIndex = 13;
             this.label19.Text = "Добро пожаловать,";
             // 
-            // addNewAdmin
+            // label21
             // 
-            this.addNewAdmin.Location = new System.Drawing.Point(218, 332);
-            this.addNewAdmin.Margin = new System.Windows.Forms.Padding(2);
-            this.addNewAdmin.Name = "addNewAdmin";
-            this.addNewAdmin.Size = new System.Drawing.Size(243, 28);
-            this.addNewAdmin.TabIndex = 28;
-            this.addNewAdmin.Text = "Сделать администратором";
-            this.addNewAdmin.UseVisualStyleBackColor = true;
-            this.addNewAdmin.Click += new System.EventHandler(this.addNewAdmin_Click);
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label21.ForeColor = System.Drawing.Color.Red;
+            this.label21.Location = new System.Drawing.Point(209, 188);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(194, 18);
+            this.label21.TabIndex = 13;
+            this.label21.Text = "Ошибка вводимых данных";
             // 
             // Column1
             // 
@@ -594,6 +611,34 @@
             this.Column1.HeaderText = "№";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
+            // 
+            // Column7
+            // 
+            this.Column7.FillWeight = 80F;
+            this.Column7.HeaderText = "Логин";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            // 
+            // Column8
+            // 
+            this.Column8.FillWeight = 80F;
+            this.Column8.HeaderText = "Пароль";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.FillWeight = 89.54315F;
+            this.Column2.HeaderText = "Имя";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.FillWeight = 89.54315F;
+            this.Column3.HeaderText = "Фамилия";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             // 
             // Column6
             // 
@@ -615,20 +660,6 @@
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
             // 
-            // Column2
-            // 
-            this.Column2.FillWeight = 89.54315F;
-            this.Column2.HeaderText = "Имя";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.FillWeight = 89.54315F;
-            this.Column3.HeaderText = "Фамилия";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
             // AdministratorMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -637,6 +668,7 @@
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AdministratorMainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AdministratorMainForm";
             this.Load += new System.EventHandler(this.AdministratorMainForm_Load);
             this.tabControl1.ResumeLayout(false);
@@ -695,11 +727,14 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Button addNewAdmin;
+        private System.Windows.Forms.Label label21;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
     }
 }
