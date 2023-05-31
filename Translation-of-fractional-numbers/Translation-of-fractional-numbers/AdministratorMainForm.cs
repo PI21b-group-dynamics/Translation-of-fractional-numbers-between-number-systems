@@ -15,6 +15,7 @@ namespace Translation_of_fractional_numbers
         public AdministratorMainForm()
         {
             InitializeComponent();
+            deleteButton.Enabled = false;
         }
 
         public AdministratorMainForm(string userLogin)
@@ -482,6 +483,44 @@ namespace Translation_of_fractional_numbers
             startNumberSystemBox.Text = "2";
             endNumberSystemBox_Enter(null, null);
             endNumberSystemBox.Text = "10";
+        }
+
+        private void DeleteSelectedUser()
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                deleteButton.Enabled = true;
+                // получаем имя пользователя из выбранной строки dataGridView
+                string username = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+
+                // вызываем функцию для удаления пользователя
+                DeleteUser(username);
+            }
+        }
+      
+        private void DeleteUser(string username)
+        {
+            string userFilePath = $"Users\\{username}.txt";
+            string userInfoFilePath = $"Users\\{username}Info.txt";
+
+            if (File.Exists(userFilePath))
+            {
+                File.Delete(userFilePath);
+            }
+
+            if (File.Exists(userInfoFilePath))
+            {
+                File.Delete(userInfoFilePath);
+            }
+
+            // перезагрузка данных пользователей, чтобы обновить таблицу
+            dataGridView1.Rows.Clear();
+            LoadUsersData();
+        }
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            DeleteSelectedUser();
         }
     }
 }
