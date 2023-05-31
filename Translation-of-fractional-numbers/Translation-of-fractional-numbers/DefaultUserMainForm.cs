@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -8,7 +9,7 @@ namespace Translation_of_fractional_numbers
 {
     public partial class DefaultUserMainForm : Form
     {
-        private const string _alphabet = "0123456789ABCDEF.";
+        private const string _alphabet = "0123456789ABCDEF.-";
         private string _currentUser;
 
         public DefaultUserMainForm()
@@ -101,16 +102,25 @@ namespace Translation_of_fractional_numbers
             label21.Visible = false;
             try
             {
-                double decimalNumber = ConvertToDecimal(numberForTranslateBox.Text, Convert.ToInt32(startNumberSystemBox.Text));
+                decimal decimalNumber = (decimal)ConvertToDecimal(Convert.ToDouble(numberForTranslateBox.Text, CultureInfo.InvariantCulture), Convert.ToInt32(startNumberSystemBox.Text));
                 string result = ConvertFromDecimal(decimalNumber, Convert.ToInt32(endNumberSystemBox.Text));
+                string minus = "";
                 for (int i = 0; i < result.Length; i++)
                 {
+                    if (result[i] == '-')
+                    {
+                        minus += result[i];
+                        continue;
+                    }
+
                     if (result[i] != '0')
                     {
-                        resultBox.Text = result.Substring(i, result.Length - i);
+                        result = result.Substring(i, result.Length - i);
                         break;
                     }
                 }
+                minus += result;
+                resultBox.Text = minus;
                 translateCountLabel.Text = (Int32.Parse(translateCountLabel.Text) + 1).ToString();
                 UpdateUserInfo(translateCountLabel.Text, profileEditCount.Text, warningsCount.Text, _currentUser);
             }
@@ -128,16 +138,18 @@ namespace Translation_of_fractional_numbers
             }
         }
 
-        static double ConvertToDecimal(string number, int baseValue)
+        static double ConvertToDecimal(double number, int baseValue)
         {
-            if (baseValue < 1 || baseValue > 16)
+            if (baseValue < 1 || baseValue > 16) { throw new ArgumentException("Неверное или неподдерживаемое основание системы счисления."); }
+
+            double decimalNumber = number;
+
+            if (number < 0)
             {
-                throw new ArgumentException("Неверное или неподдерживаемое основание системы счисления.");
+                decimalNumber = Math.Abs(number);
             }
 
-            string decimalNumber = number.Replace(",", ".");
-
-            string[] parts = decimalNumber.Split('.');
+            string[] parts = decimalNumber.ToString().Replace(",", ".").Split('.');
 
             double resultInt = 0;
             string chars;
@@ -145,7 +157,7 @@ namespace Translation_of_fractional_numbers
             if (baseValue == 1)
             {
                 chars = "1";
-                if (!number.All(c => chars.Contains(c)))
+                if (!decimalNumber.ToString().All(c => chars.Contains(c)))
                 {
                     throw new ArgumentException("Некорректный символ в числе.");
                 }
@@ -154,12 +166,12 @@ namespace Translation_of_fractional_numbers
                 {
                     resultInt++;
                 }
-                return resultInt;
+                return (number < 0) ? -resultInt : resultInt;
             }
             else
             {
-                chars = _alphabet.Substring(0, baseValue);
-                if (!number.All(c => chars.Contains(c)))
+                chars = _alphabet.Substring(0, baseValue) + "-,";
+                if (!decimalNumber.ToString().All(c => chars.Contains(c)))
                 {
                     throw new ArgumentException("Некорректный символ в числе.");
                 }
@@ -201,33 +213,39 @@ namespace Translation_of_fractional_numbers
                 }
             }
 
-            return resultInt + resultFraction;
+            double result = resultInt + resultFraction;
+
+            return (number < 0) ? -result : result;
         }
 
-        static string ConvertFromDecimal(double decimalNumber, int baseValue)
+        static string ConvertFromDecimal(decimal decimalNumber, int baseValue)
         {
-            if (baseValue < 1 || baseValue > 16)
+            if (baseValue < 1 || baseValue > 16) { throw new ArgumentException("Неверное или неподдерживаемое основание системы счисления."); }
+
+            bool isNegative = false;
+            if (decimalNumber < 0)
             {
-                throw new ArgumentException("Неверное или неподдерживаемое основание системы счисления.");
+                isNegative = true;
+                decimalNumber = Math.Abs(decimalNumber);
             }
 
             string resultInt = "";
-            double intPart = Math.Truncate(decimalNumber);
-            double fractionPart = decimalNumber - intPart;
+            decimal intPart = Math.Truncate(decimalNumber);
+            decimal fractionPart = decimalNumber - intPart;
 
             if (baseValue == 1)
             {
-                for (int i = 0; i < intPart; i++)
+                for (int i = 0; i < (int)intPart; i++)
                 {
                     resultInt += '1';
                 }
-                return resultInt;
+                return (isNegative) ? "-" + resultInt : resultInt;
             }
 
             while (intPart > 0)
             {
-                double remainder = intPart % baseValue;
-                char digit = (remainder < 10) ? (char)('0' + remainder) : (char)('A' + remainder - 10);
+                decimal remainder = intPart % baseValue;
+                char digit = (remainder < 10) ? (char)('0' + (int)remainder) : (char)('A' + (int)remainder - 10);
                 resultInt = digit + resultInt;
                 intPart /= baseValue;
             }
@@ -235,9 +253,9 @@ namespace Translation_of_fractional_numbers
             string resultFraction = "";
             for (int i = 0; i < 10 && fractionPart > 0; i++)
             {
-                double value = fractionPart * baseValue;
-                double intPartFraction = Math.Truncate(value);
-                char digit = (intPartFraction < 10) ? (char)('0' + intPartFraction) : (char)('A' + intPartFraction - 10);
+                decimal value = fractionPart * baseValue;
+                decimal intPartFraction = Math.Truncate(value);
+                char digit = (intPartFraction < 10) ? (char)('0' + (int)intPartFraction) : (char)('A' + (int)intPartFraction - 10);
                 resultFraction += digit;
                 fractionPart = value - intPartFraction;
             }
@@ -248,7 +266,7 @@ namespace Translation_of_fractional_numbers
                 result += "." + resultFraction;
             }
 
-            return result;
+            return (isNegative) ? "-" + result : result;
         }
 
         private void startNumberSystemBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -334,6 +352,12 @@ namespace Translation_of_fractional_numbers
                 {
                     e.Handled = true;
                 }
+
+                if (e.KeyChar == '-' && numberForTranslateBox.Text.Contains("-"))
+                {
+                    e.Handled = true;
+                }
+                else if (e.KeyChar == '-' && numberForTranslateBox.Text.Length == 0) { }
             }
             else
             {
