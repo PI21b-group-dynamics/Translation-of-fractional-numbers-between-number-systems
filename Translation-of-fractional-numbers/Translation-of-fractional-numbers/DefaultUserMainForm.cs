@@ -58,12 +58,31 @@ namespace Translation_of_fractional_numbers
 
         private void editButton_Click(object sender, EventArgs e)
         {
+            string messageToLog = "LogsUser";
+            string Name = "Имя";
+            string SurName = "Фамилия";
+            string Login = "Логин";
+            string Password = "Пароль";
             new ProfileEditForm(userLoginBox.Text, userPasswordBox.Text, userNameBox.Text, userSurnameBox.Text, false).ShowDialog();
             profileEditCount.Text = (Int32.Parse(warningsCount.Text) + 1).ToString();
             UpdateUserInfo(translateCountLabel.Text, profileEditCount.Text, warningsCount.Text, _currentUser);
             LoadUserData(userLoginBox.Text);
+            UpdateLogInfo(Name, userNameBox.Text, messageToLog);
+            UpdateLogInfo(SurName, userSurnameBox.Text, messageToLog);
+            UpdateLogInfo(Login, userLoginBox.Text, messageToLog);
+            UpdateLogInfo(Password, userPasswordBox.Text, messageToLog);
         }
-
+        
+        private void UpdateLogInfo(string message, string messageToLog, string user)
+        {
+            DateTime time;
+            time = DateTime.Now;
+            using (StreamWriter sw = new StreamWriter($"Users\\{user}.txt", true))
+            {
+                sw.WriteLine($"{message} - {messageToLog}: {time.ToShortTimeString()}\n");
+            }
+        }
+        
         private void numberForTranslateBox_TextChanged(object sender, EventArgs e)
         {
             if (startNumberSystemBox.ForeColor == Color.Gray || endNumberSystemBox.ForeColor == Color.Gray || numberForTranslateBox.Text == "")
