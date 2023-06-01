@@ -123,6 +123,9 @@ namespace Translation_of_fractional_numbers
                 resultBox.Text = minus;
                 translateCountLabel.Text = (Int32.Parse(translateCountLabel.Text) + 1).ToString();
                 UpdateUserInfo(translateCountLabel.Text, profileEditCount.Text, warningsCount.Text, _currentUser);
+                ConvertToBinary(int.Parse(result), Convert.ToInt32(endNumberSystemBox.Text));
+               
+
             }
             catch (Exception)
             {
@@ -265,8 +268,28 @@ namespace Translation_of_fractional_numbers
             {
                 result += "." + resultFraction;
             }
+            
 
             return (isNegative) ? "-" + result : result;
+            
+        }
+
+        private string[] ConvertToBinary(int number, int baseNumber)
+        {
+            // Переводим число в двоичную систему счисления
+            string binary = Convert.ToString(number, 2);
+            // Дополняем нулями до 8 символов для байта
+            binary = binary.PadLeft(8, '0');
+            // Рассчитываем обратный код
+            string inverted = new string(binary.Select(b => b == '1' ? '0' : '1').ToArray());
+            // Рассчитываем прямой код
+            string direct = binary;
+            // Переводим обратный и прямой коды в заданную систему счисления
+            inverted = Convert.ToString(Convert.ToInt32(inverted, 2), baseNumber);
+            direct = Convert.ToString(Convert.ToInt32(direct, 2), baseNumber);
+            binaryTextBox.Text = direct;
+            inverseBinaryTextBox.Text = inverted;
+            return new string[] { direct, inverted };
         }
 
         private void startNumberSystemBox_KeyPress(object sender, KeyPressEventArgs e)

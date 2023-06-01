@@ -66,6 +66,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.deleteButton = new System.Windows.Forms.Button();
             this.addNewAdmin = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -79,7 +80,10 @@
             this.label20 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.deleteButton = new System.Windows.Forms.Button();
+            this.binaryTextBox = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.inverseBinaryTextBox = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -103,6 +107,10 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabPage1.Controls.Add(this.binaryTextBox);
+            this.tabPage1.Controls.Add(this.label22);
+            this.tabPage1.Controls.Add(this.label23);
+            this.tabPage1.Controls.Add(this.inverseBinaryTextBox);
             this.tabPage1.Controls.Add(this.label21);
             this.tabPage1.Controls.Add(this.exitButton);
             this.tabPage1.Controls.Add(this.downloadTest);
@@ -140,7 +148,7 @@
             // exitButton
             // 
             this.exitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.exitButton.Location = new System.Drawing.Point(669, 372);
+            this.exitButton.Location = new System.Drawing.Point(749, 407);
             this.exitButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(111, 33);
@@ -152,7 +160,7 @@
             // downloadTest
             // 
             this.downloadTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.downloadTest.Location = new System.Drawing.Point(191, 268);
+            this.downloadTest.Location = new System.Drawing.Point(212, 407);
             this.downloadTest.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.downloadTest.Name = "downloadTest";
             this.downloadTest.Size = new System.Drawing.Size(316, 33);
@@ -164,7 +172,7 @@
             // clearFields
             // 
             this.clearFields.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.clearFields.Location = new System.Drawing.Point(35, 268);
+            this.clearFields.Location = new System.Drawing.Point(62, 407);
             this.clearFields.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.clearFields.Name = "clearFields";
             this.clearFields.Size = new System.Drawing.Size(124, 33);
@@ -519,6 +527,17 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Администрирование";
             // 
+            // deleteButton
+            // 
+            this.deleteButton.Location = new System.Drawing.Point(356, 408);
+            this.deleteButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(139, 34);
+            this.deleteButton.TabIndex = 29;
+            this.deleteButton.Text = "Удалить";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            // 
             // addNewAdmin
             // 
             this.addNewAdmin.Location = new System.Drawing.Point(11, 408);
@@ -648,16 +667,43 @@
             this.label19.TabIndex = 13;
             this.label19.Text = "Добро пожаловать,";
             // 
-            // deleteButton
+            // binaryTextBox
             // 
-            this.deleteButton.Location = new System.Drawing.Point(356, 408);
-            this.deleteButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(139, 34);
-            this.deleteButton.TabIndex = 29;
-            this.deleteButton.Text = "Удалить";
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            this.binaryTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.binaryTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.binaryTextBox.Location = new System.Drawing.Point(148, 318);
+            this.binaryTextBox.Name = "binaryTextBox";
+            this.binaryTextBox.Size = new System.Drawing.Size(123, 28);
+            this.binaryTextBox.TabIndex = 22;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label22.Location = new System.Drawing.Point(31, 321);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(81, 22);
+            this.label22.TabIndex = 21;
+            this.label22.Text = "Прямой:";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label23.Location = new System.Drawing.Point(31, 280);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(100, 22);
+            this.label23.TabIndex = 20;
+            this.label23.Text = "Обратный:";
+            // 
+            // inverseBinaryTextBox
+            // 
+            this.inverseBinaryTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.inverseBinaryTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.inverseBinaryTextBox.Location = new System.Drawing.Point(148, 274);
+            this.inverseBinaryTextBox.Name = "inverseBinaryTextBox";
+            this.inverseBinaryTextBox.Size = new System.Drawing.Size(123, 28);
+            this.inverseBinaryTextBox.TabIndex = 19;
             // 
             // AdministratorMainForm
             // 
@@ -736,5 +782,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.TextBox binaryTextBox;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox inverseBinaryTextBox;
     }
 }
