@@ -126,13 +126,32 @@ namespace Translation_of_fractional_numbers
         {
             if (_currentUser == "admin")
                 MessageBox.Show("Главный администратор не может редактировать свои данные", "Ошибка редактирования", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
+            
+            string messageToLog = "LogsAdmin";
+            string Name = "Имя";
+            string SurName = "Фамилия";
+            string Login = "Логин";
+            string Password = "Пароль";
             new ProfileEditForm(userLoginBox.Text, userPasswordBox.Text, userNameBox.Text, userSurnameBox.Text, true).ShowDialog();
             profileEditCount.Text = (Int32.Parse(warningsCount.Text) + 1).ToString();
             UpdateUserInfo(translateCountLabel.Text, profileEditCount.Text, warningsCount.Text, _currentUser);
             LoadUserAdminData(userLoginBox.Text);
+            UpdateLogInfo(Name, userNameBox.Text, messageToLog);
+            UpdateLogInfo(SurName, userSurnameBox.Text, messageToLog);
+            UpdateLogInfo(Login, userLoginBox.Text, messageToLog);
+            UpdateLogInfo(Password, userPasswordBox.Text, messageToLog);
         }
 
+        private void UpdateLogInfo(string message, string messageToLog, string user)
+        {
+            DateTime time;
+            time = DateTime.Now;
+            using (StreamWriter sw = new StreamWriter($"Users\\{user}.txt", true))
+            {
+                sw.WriteLine($"{message} - {messageToLog}: {time.ToShortTimeString()}\n");
+            }
+        }
+        
         private void numberForTranslateBox_TextChanged(object sender, EventArgs e)
         {
             if (startNumberSystemBox.ForeColor == Color.Gray || endNumberSystemBox.ForeColor == Color.Gray || numberForTranslateBox.Text == "")
@@ -508,10 +527,11 @@ namespace Translation_of_fractional_numbers
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
+                string messageToLog = "AdminDelete";
                 deleteButton.Enabled = true;
                 // получаем имя пользователя из выбранной строки dataGridView
                 string username = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
-
+                UpdateLogInfo(username, messageToLog);
                 // вызываем функцию для удаления пользователя
                 DeleteUser(username);
             }
@@ -540,6 +560,16 @@ namespace Translation_of_fractional_numbers
         private void deleteButton_Click(object sender, EventArgs e)
         {
             DeleteSelectedUser();
+        }
+        
+        private void UpdateLogInfo(string messageToLog, string user)
+        {
+            DateTime time;
+            time = DateTime.Now;
+            using (StreamWriter sw = new StreamWriter($"Users\\{user}Log.txt", true))
+            {
+                sw.Write($"{messageToLog} ; {time.ToShortTimeString()}\n");
+            }
         }
     }
 }
