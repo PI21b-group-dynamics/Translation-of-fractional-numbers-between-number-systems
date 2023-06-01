@@ -71,6 +71,7 @@ namespace Translation_of_fractional_numbers
             UpdateLogInfo(SurName, userSurnameBox.Text, messageToLog);
             UpdateLogInfo(Login, userLoginBox.Text, messageToLog);
             UpdateLogInfo(Password, userPasswordBox.Text, messageToLog);
+            
         }
         
         private void UpdateLogInfo(string message, string messageToLog, string user)
@@ -143,7 +144,8 @@ namespace Translation_of_fractional_numbers
                 translateCountLabel.Text = (Int32.Parse(translateCountLabel.Text) + 1).ToString();
                 UpdateUserInfo(translateCountLabel.Text, profileEditCount.Text, warningsCount.Text, _currentUser);
                 ConvertToBinary(int.Parse(result), Convert.ToInt32(endNumberSystemBox.Text));
-               
+                UpdateLogInfo("Было переведено число " + numberForTranslateBox.Text + " из " + startNumberSystemBox.Text + " в " + endNumberSystemBox.Text, _currentUser);
+
 
             }
             catch (Exception)
@@ -308,6 +310,10 @@ namespace Translation_of_fractional_numbers
             direct = Convert.ToString(Convert.ToInt32(direct, 2), baseNumber);
             binaryTextBox.Text = direct;
             inverseBinaryTextBox.Text = inverted;
+            if (int.Parse(binaryTextBox.Text) != 0 && int.Parse(inverseBinaryTextBox.Text) != 0)
+            {
+                UpdateLogInfo("Было переведено число " + numberForTranslateBox.Text + " в обратный код с результатом: " + inverseBinaryTextBox.Text + " , прямой код: " + binaryTextBox.Text, _currentUser);
+            }
             return new string[] { direct, inverted };
         }
 
@@ -433,6 +439,17 @@ namespace Translation_of_fractional_numbers
             startNumberSystemBox.Text = "2";
             endNumberSystemBox_Enter(null, null);
             endNumberSystemBox.Text = "10";
+            UpdateLogInfo("Был загружен тестовый пример ", _currentUser);
+        }
+
+        private void UpdateLogInfo(string messageToLog, string user)
+        {
+            DateTime time;
+            time = DateTime.Now;
+            using (StreamWriter sw = new StreamWriter($"Users\\{user}Log.txt", true))
+            {
+                sw.Write($"{messageToLog} ; {time.ToShortTimeString()}\n");
+            }
         }
     }
 }

@@ -52,6 +52,7 @@ namespace Translation_of_fractional_numbers
             }
 
             UpdateUserData(editLoginBox.Text, userPasswordBox.Text, editNameBox.Text, EditSurnameBox.Text);
+            UpdateLogInfo("Пользователь отредактировал своё имя на: " + editNameBox.Text + " ,пароль на: " + editPasswordBox.Text + " ,логин на: " + editLoginBox.Text + " ,фамилию на: " + EditSurnameBox.Text, _currentUser);
             MessageBox.Show("Данные успешно изменены.", "Уведомление", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
         }
@@ -62,6 +63,16 @@ namespace Translation_of_fractional_numbers
             {
                 sw.Write($"{login}\n{password}\n{name}\n{surname}\n{_admin}\n");
                 sw.Close();
+            }
+        }
+
+        private void UpdateLogInfo(string messageToLog, string user)
+        {
+            DateTime time;
+            time = DateTime.Now;
+            using (StreamWriter sw = new StreamWriter($"Users\\{user}Log.txt", true))
+            {
+                sw.Write($"{messageToLog} ; {time.ToShortTimeString()}\n");
             }
         }
     }

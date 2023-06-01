@@ -30,6 +30,10 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.binaryTextBox = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.inverseBinaryTextBox = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.exitButton = new System.Windows.Forms.Button();
             this.downloadTest = new System.Windows.Forms.Button();
@@ -80,10 +84,6 @@
             this.label20 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.binaryTextBox = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.inverseBinaryTextBox = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -132,6 +132,44 @@
             this.tabPage1.Size = new System.Drawing.Size(883, 453);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Переводчик";
+            // 
+            // binaryTextBox
+            // 
+            this.binaryTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.binaryTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.binaryTextBox.Location = new System.Drawing.Point(148, 318);
+            this.binaryTextBox.Name = "binaryTextBox";
+            this.binaryTextBox.Size = new System.Drawing.Size(123, 28);
+            this.binaryTextBox.TabIndex = 22;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label22.Location = new System.Drawing.Point(31, 321);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(81, 22);
+            this.label22.TabIndex = 21;
+            this.label22.Text = "Прямой:";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label23.Location = new System.Drawing.Point(31, 280);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(100, 22);
+            this.label23.TabIndex = 20;
+            this.label23.Text = "Обратный:";
+            // 
+            // inverseBinaryTextBox
+            // 
+            this.inverseBinaryTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.inverseBinaryTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.inverseBinaryTextBox.Location = new System.Drawing.Point(148, 274);
+            this.inverseBinaryTextBox.Name = "inverseBinaryTextBox";
+            this.inverseBinaryTextBox.Size = new System.Drawing.Size(123, 28);
+            this.inverseBinaryTextBox.TabIndex = 19;
             // 
             // label21
             // 
@@ -574,6 +612,7 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(857, 357);
             this.dataGridView1.TabIndex = 16;
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
             // Column1
             // 
@@ -666,44 +705,6 @@
             this.label19.Size = new System.Drawing.Size(175, 22);
             this.label19.TabIndex = 13;
             this.label19.Text = "Добро пожаловать,";
-            // 
-            // binaryTextBox
-            // 
-            this.binaryTextBox.BackColor = System.Drawing.SystemColors.Control;
-            this.binaryTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.binaryTextBox.Location = new System.Drawing.Point(148, 318);
-            this.binaryTextBox.Name = "binaryTextBox";
-            this.binaryTextBox.Size = new System.Drawing.Size(123, 28);
-            this.binaryTextBox.TabIndex = 22;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label22.Location = new System.Drawing.Point(31, 321);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(81, 22);
-            this.label22.TabIndex = 21;
-            this.label22.Text = "Прямой:";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label23.Location = new System.Drawing.Point(31, 280);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(100, 22);
-            this.label23.TabIndex = 20;
-            this.label23.Text = "Обратный:";
-            // 
-            // inverseBinaryTextBox
-            // 
-            this.inverseBinaryTextBox.BackColor = System.Drawing.SystemColors.Control;
-            this.inverseBinaryTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.inverseBinaryTextBox.Location = new System.Drawing.Point(148, 274);
-            this.inverseBinaryTextBox.Name = "inverseBinaryTextBox";
-            this.inverseBinaryTextBox.Size = new System.Drawing.Size(123, 28);
-            this.inverseBinaryTextBox.TabIndex = 19;
             // 
             // AdministratorMainForm
             // 

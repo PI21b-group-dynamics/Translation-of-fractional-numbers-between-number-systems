@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -40,6 +41,10 @@ namespace Translation_of_fractional_numbers
             foreach (string filepath in Directory.GetFiles("Users", "*.txt"))
             {
                 if (Path.GetFileNameWithoutExtension(filepath).Contains("Info"))
+                {
+                    continue;
+                }
+                else if (Path.GetFileNameWithoutExtension(filepath).Contains("Log"))
                 {
                     continue;
                 }
@@ -86,7 +91,7 @@ namespace Translation_of_fractional_numbers
                 profileEditCount.Text = sr.ReadLine();
                 warningsCount.Text = sr.ReadLine();
             }
-
+            
             using (StreamReader sr = new StreamReader($"Users\\{userLogin}.txt"))
             {
                 userLoginBox.Text = sr.ReadLine();
@@ -212,6 +217,7 @@ namespace Translation_of_fractional_numbers
                 translateCountLabel.Text = (Int32.Parse(translateCountLabel.Text) + 1).ToString();
                 UpdateUserInfo(translateCountLabel.Text, profileEditCount.Text, warningsCount.Text, _currentUser);
                 ConvertToBinary(int.Parse(result), Convert.ToInt32(endNumberSystemBox.Text));
+                UpdateLogInfo("Было переведено число " + numberForTranslateBox.Text + " из " + startNumberSystemBox.Text + " в " + endNumberSystemBox.Text, _currentUser);
             }
             catch (Exception)
             {
@@ -373,6 +379,10 @@ namespace Translation_of_fractional_numbers
             direct = Convert.ToString(Convert.ToInt32(direct, 2), baseNumber);
             binaryTextBox.Text = direct;
             inverseBinaryTextBox.Text = inverted;
+            if (int.Parse(binaryTextBox.Text) != 0 && int.Parse(inverseBinaryTextBox.Text) != 0)
+            {
+                UpdateLogInfo("Было переведено число " + numberForTranslateBox.Text + " в обратный код с результатом: " + inverseBinaryTextBox.Text + " , прямой код: " + binaryTextBox.Text, _currentUser);
+            }
             return new string[] { direct, inverted };
         }
 
@@ -383,12 +393,14 @@ namespace Translation_of_fractional_numbers
                 MessageBox.Show("Данный пользователь уже является администратором.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 warningsCount.Text = (Int32.Parse(warningsCount.Text) + 1).ToString();
                 UpdateUserInfo(translateCountLabel.Text, profileEditCount.Text, warningsCount.Text, _currentUser);
+
                 return;
             }
 
             dataGridView1.CurrentRow.Cells[0].Value = dataGridView1.CurrentRow.Cells[0].Value.ToString() + '*';
             UpdateUserData(dataGridView1.CurrentRow.Cells[1].Value.ToString(), dataGridView1.CurrentRow.Cells[2].Value.ToString(), dataGridView1.CurrentRow.Cells[3].Value.ToString(), dataGridView1.CurrentRow.Cells[4].Value.ToString());
             MessageBox.Show("Данный пользователь назначен администратором.", "Уведомление", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            UpdateLogInfo("Пользователь " + dataGridView1.CurrentRow.Cells[1].Value.ToString() + " был назначен администратором ", _currentUser);
         }
 
         private void UpdateUserData(string login, string password, string name, string surname)
@@ -527,11 +539,12 @@ namespace Translation_of_fractional_numbers
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                string messageToLog = "AdminDelete";
+                
                 deleteButton.Enabled = true;
                 // получаем имя пользователя из выбранной строки dataGridView
                 string username = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
-                UpdateLogInfo(username, messageToLog);
+                string messageToLog = $"Был удален пользователь под следующим именем";
+                UpdateLogInfo( messageToLog + " " + username, _currentUser);
                 // вызываем функцию для удаления пользователя
                 DeleteUser(username);
             }
@@ -569,6 +582,39 @@ namespace Translation_of_fractional_numbers
             using (StreamWriter sw = new StreamWriter($"Users\\{user}Log.txt", true))
             {
                 sw.Write($"{messageToLog} ; {time.ToShortTimeString()}\n");
+            }
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Проверяем, что двойной щелчок произошел на строке
+            if (e.RowIndex >= 0)
+            {
+                // Получаем DataGridView, на котором произошел двойной щелчок
+                DataGridView dataGridView = (DataGridView)sender;
+
+                // Вызываем функцию для открытия файла
+                OpenFileFromSelectedRow(dataGridView);
+            }
+        }
+
+        private void OpenFileFromSelectedRow(DataGridView dataGridView)
+        {
+            if (dataGridView.SelectedRows.Count > 0)
+            {
+                // Получаем значение из ячейки с именем файла в выделенной строке
+                string username = dataGridView.SelectedRows[0].Cells["Column7"].Value.ToString();
+                string fileName = $"Users\\{username}Log.txt";
+
+                try
+                {
+                    // Открываем файл с именем, указанным в ячейке
+                    Process.Start(fileName);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Не удалось открыть файл: " + ex.Message);
+                }
             }
         }
     }
