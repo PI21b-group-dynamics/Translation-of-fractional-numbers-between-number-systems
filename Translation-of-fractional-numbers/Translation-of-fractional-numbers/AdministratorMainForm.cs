@@ -75,6 +75,7 @@ namespace Translation_of_fractional_numbers
                 }
 
                 dataGridView1.Rows.Add(index + admin, login, password, name, surname, warning, edit, translate);
+                index++;
             }
         }
 
@@ -193,32 +194,36 @@ namespace Translation_of_fractional_numbers
             {
                 decimal decimalNumber = (decimal)ConvertToDecimal(Convert.ToDouble(numberForTranslateBox.Text, CultureInfo.InvariantCulture), Convert.ToInt32(startNumberSystemBox.Text));
                 string result = ConvertFromDecimal(decimalNumber, Convert.ToInt32(endNumberSystemBox.Text));
-                string minus = "";
-                for (int i = 0; i < result.Length; i++)
-                {
-                    if (result[i] == '-')
-                    {
-                        minus += result[i];
-                        continue;
-                    }
-
-                    if (result[i] != '0')
-                    {
-                        result = result.Substring(i, result.Length - i);
-                        break;
-                    }
-                }
-                minus += result;
-                resultBox.Text = minus;
+                resultBox.Text = DelZero(result);
                 translateCountLabel.Text = (Int32.Parse(translateCountLabel.Text) + 1).ToString();
                 UpdateUserInfo(translateCountLabel.Text, profileEditCount.Text, warningsCount.Text, _currentUser);
-                ConvertToBinary(int.Parse(result), Convert.ToInt32(endNumberSystemBox.Text));
+                ConvertToBinary((int)decimalNumber, Convert.ToInt32(endNumberSystemBox.Text));
                 UpdateLogInfo("Было переведено число " + numberForTranslateBox.Text + " из " + startNumberSystemBox.Text + " в " + endNumberSystemBox.Text, _currentUser);
             }
             catch (Exception)
             {
                 label21.Visible = true;
             }
+        }
+
+        private string DelZero(string result)
+        {
+            string minus = "";
+            for (int i = 0; i < result.Length; i++)
+            {
+                if (result[i] == '-')
+                {
+                    minus += result[i];
+                    continue;
+                }
+
+                if (result[i] != '0')
+                {
+                    result = result.Substring(i, result.Length - i);
+                    break;
+                }
+            }
+            return minus += result;
         }
 
         private void UpdateUserInfo(string translates, string edits, string warnings, string user)
@@ -362,19 +367,15 @@ namespace Translation_of_fractional_numbers
 
         private string[] ConvertToBinary(int number, int baseNumber)
         {
-            // Переводим число в двоичную систему счисления
             string binary = Convert.ToString(number, 2);
-            // Дополняем нулями до 8 символов для байта
             binary = binary.PadLeft(8, '0');
-            // Рассчитываем обратный код
             string inverted = new string(binary.Select(b => b == '1' ? '0' : '1').ToArray());
-            // Рассчитываем прямой код
             string direct = binary;
-            // Переводим обратный и прямой коды в заданную систему счисления
-            inverted = Convert.ToString(Convert.ToInt32(inverted, 2), baseNumber);
-            direct = Convert.ToString(Convert.ToInt32(direct, 2), baseNumber);
-            binaryTextBox.Text = direct;
-            inverseBinaryTextBox.Text = inverted;
+            
+            inverted = ConvertFromDecimal(((decimal)ConvertToDecimal(Convert.ToDouble(inverted), 2)), baseNumber);
+            direct = ConvertFromDecimal(((decimal)ConvertToDecimal(Convert.ToDouble(direct), 2)), baseNumber);
+            binaryTextBox.Text = DelZero(direct);
+            inverseBinaryTextBox.Text = DelZero(inverted);
             if (int.Parse(binaryTextBox.Text) != 0 && int.Parse(inverseBinaryTextBox.Text) != 0)
             {
                 UpdateLogInfo("Было переведено число " + numberForTranslateBox.Text + " в обратный код с результатом: " + inverseBinaryTextBox.Text + " , прямой код: " + binaryTextBox.Text, _currentUser);
