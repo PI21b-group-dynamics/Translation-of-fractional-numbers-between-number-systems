@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -12,6 +13,7 @@ namespace Translation_of_fractional_numbers
     {
         private const string _alphabet = "0123456789ABCDEF.-";
         private string _currentUser;
+        private DataTable _dataTable;
 
         public AdministratorMainForm()
         {
@@ -77,6 +79,32 @@ namespace Translation_of_fractional_numbers
                 dataGridView1.Rows.Add(index + admin, login, password, name, surname, warning, edit, translate);
                 index++;
             }
+
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                comboBox.Items.Add(column.HeaderText);
+            }
+            comboBox.SelectedIndex = 0;
+
+            _dataTable = new DataTable();
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                _dataTable.Columns.Add(column.HeaderText);
+            }
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                DataRow dataRow = _dataTable.NewRow();
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    dataRow[cell.ColumnIndex] = cell.Value;
+                }
+                _dataTable.Rows.Add(dataRow);
+            }
+            dataGridView1.Rows.Clear();
+            dataGridView1.Columns.Clear();
+            dataGridView1.DataSource = _dataTable;
+            label26.Text = "Количество записей: " + dataGridView1.Rows.Count;
         }
 
         private void LoadUserAdminData(string userLogin)
@@ -231,6 +259,13 @@ namespace Translation_of_fractional_numbers
             using (StreamWriter sw = new StreamWriter($"Users\\{user}Info.txt"))
             {
                 sw.Write($"{translates}\n{edits}\n{warnings}\n");
+            }
+            if (_currentUser == "admin")
+                LoadAdminData(_currentUser);
+            else
+            {
+                LoadUserAdminData(_currentUser);
+                LoadUsersData();
             }
         }
 
@@ -613,6 +648,11 @@ namespace Translation_of_fractional_numbers
                     MessageBox.Show("Не удалось открыть файл: " + ex.Message);
                 }
             }
+        }
+
+        private void textBox_TextChanged(object sender, EventArgs e)
+        {
+            _dataTable.DefaultView.RowFilter = string.Format("{0} LIKE '%{1}%'", comboBox.SelectedItem, textBox.Text);
         }
     }
 }
