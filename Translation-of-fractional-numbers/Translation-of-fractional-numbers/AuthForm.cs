@@ -23,7 +23,18 @@ namespace Translation_numbers
 
         private void AuthForm_Load(object sender, EventArgs e)
         {
-
+            if (File.Exists("Users\\LastUserInfo.txt"))
+            {
+                using (StreamReader sr = new StreamReader("Users\\LastUserInfo.txt"))
+                {
+                    userLoginBox_Enter(null, null);
+                    userLoginBox.Text = sr.ReadLine();
+                    userLoginBox_Leave(null, null);
+                    userPasswordBox_Enter(null, null);
+                    userPasswordBox.Text = sr.ReadLine();
+                    userPasswordBox_Leave(null, null);
+                }
+            }
         }
 
         private void autgBtn_Click(object sender, EventArgs e)
@@ -33,6 +44,11 @@ namespace Translation_numbers
                 Hide();
                 new AdministratorMainForm("admin").ShowDialog();
                 Show();
+                using (StreamWriter sw = new StreamWriter("Users\\LastUserInfo.txt"))
+                {
+                    sw.WriteLine("");
+                    sw.WriteLine("");
+                }
                 return;
             }
 
@@ -52,6 +68,11 @@ namespace Translation_numbers
                 new AdministratorMainForm(userLoginBox.Text).ShowDialog();
             }
 
+            using (StreamWriter sw = new StreamWriter("Users\\LastUserInfo.txt"))
+            {
+                sw.WriteLine(userLoginBox.Text);
+                sw.WriteLine(userPasswordBox.Text);
+            }
         }
 
         private string TryLogin()
