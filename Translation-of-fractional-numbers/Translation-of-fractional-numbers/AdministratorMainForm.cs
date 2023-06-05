@@ -662,13 +662,15 @@ namespace Translation_of_fractional_numbers
             if (dataGridView.SelectedRows.Count > 0)
             {
                 // Получаем значение из ячейки с именем файла в выделенной строке
-                string username = dataGridView.SelectedRows[0].Cells["Column7"].Value.ToString();
-                string fileName = $"Users\\{username}Log.txt";
+                string username = dataGridView.SelectedRows[0].Cells["Логин"].Value.ToString();
+                string logFileName = $"Users\\{username}Log.txt";
+                string infoFileName = $"Users\\{username}Info.txt";
 
                 try
                 {
                     // Открываем файл с именем, указанным в ячейке
-                    Process.Start(fileName);
+                    Process.Start(logFileName);
+                    Process.Start(infoFileName);
                 }
                 catch (Exception ex)
                 {
