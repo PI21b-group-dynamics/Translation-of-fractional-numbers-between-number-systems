@@ -30,6 +30,10 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.binaryTextBox = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.inverseBinaryTextBox = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.exitButton = new System.Windows.Forms.Button();
             this.downloadTest = new System.Windows.Forms.Button();
@@ -65,10 +69,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.inverseBinaryTextBox = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.binaryTextBox = new System.Windows.Forms.TextBox();
+            this.symbolCountError = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -89,6 +90,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabPage1.Controls.Add(this.symbolCountError);
             this.tabPage1.Controls.Add(this.binaryTextBox);
             this.tabPage1.Controls.Add(this.label19);
             this.tabPage1.Controls.Add(this.label17);
@@ -114,6 +116,44 @@
             this.tabPage1.Size = new System.Drawing.Size(817, 412);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Переводчик";
+            // 
+            // binaryTextBox
+            // 
+            this.binaryTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.binaryTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.binaryTextBox.Location = new System.Drawing.Point(148, 316);
+            this.binaryTextBox.Name = "binaryTextBox";
+            this.binaryTextBox.Size = new System.Drawing.Size(123, 28);
+            this.binaryTextBox.TabIndex = 18;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label19.Location = new System.Drawing.Point(31, 319);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(81, 22);
+            this.label19.TabIndex = 17;
+            this.label19.Text = "Прямой:";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label17.Location = new System.Drawing.Point(31, 278);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(100, 22);
+            this.label17.TabIndex = 16;
+            this.label17.Text = "Обратный:";
+            // 
+            // inverseBinaryTextBox
+            // 
+            this.inverseBinaryTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.inverseBinaryTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.inverseBinaryTextBox.Location = new System.Drawing.Point(148, 272);
+            this.inverseBinaryTextBox.Name = "inverseBinaryTextBox";
+            this.inverseBinaryTextBox.Size = new System.Drawing.Size(123, 28);
+            this.inverseBinaryTextBox.TabIndex = 15;
             // 
             // label21
             // 
@@ -493,43 +533,18 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Личные данные";
             // 
-            // inverseBinaryTextBox
+            // symbolCountError
             // 
-            this.inverseBinaryTextBox.BackColor = System.Drawing.SystemColors.Control;
-            this.inverseBinaryTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.inverseBinaryTextBox.Location = new System.Drawing.Point(148, 272);
-            this.inverseBinaryTextBox.Name = "inverseBinaryTextBox";
-            this.inverseBinaryTextBox.Size = new System.Drawing.Size(123, 28);
-            this.inverseBinaryTextBox.TabIndex = 15;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label17.Location = new System.Drawing.Point(31, 278);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(100, 22);
-            this.label17.TabIndex = 16;
-            this.label17.Text = "Обратный:";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label19.Location = new System.Drawing.Point(31, 319);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(81, 22);
-            this.label19.TabIndex = 17;
-            this.label19.Text = "Прямой:";
-            // 
-            // binaryTextBox
-            // 
-            this.binaryTextBox.BackColor = System.Drawing.SystemColors.Control;
-            this.binaryTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.binaryTextBox.Location = new System.Drawing.Point(148, 316);
-            this.binaryTextBox.Name = "binaryTextBox";
-            this.binaryTextBox.Size = new System.Drawing.Size(123, 28);
-            this.binaryTextBox.TabIndex = 18;
+            this.symbolCountError.AutoSize = true;
+            this.symbolCountError.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.symbolCountError.ForeColor = System.Drawing.Color.Red;
+            this.symbolCountError.Location = new System.Drawing.Point(374, 78);
+            this.symbolCountError.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.symbolCountError.Name = "symbolCountError";
+            this.symbolCountError.Size = new System.Drawing.Size(432, 24);
+            this.symbolCountError.TabIndex = 24;
+            this.symbolCountError.Text = "Количество знков после запятой превышает 6";
+            this.symbolCountError.Visible = false;
             // 
             // DefaultUserMainForm
             // 
@@ -595,5 +610,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox inverseBinaryTextBox;
+        private System.Windows.Forms.Label symbolCountError;
     }
 }

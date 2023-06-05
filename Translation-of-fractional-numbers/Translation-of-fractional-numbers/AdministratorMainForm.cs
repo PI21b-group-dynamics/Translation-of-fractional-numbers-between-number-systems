@@ -218,19 +218,46 @@ namespace Translation_of_fractional_numbers
         private void TranslateNumber()
         {
             label21.Visible = false;
-            try
+            if (numberForTranslateBox.Text.Contains("."))
             {
-                decimal decimalNumber = (decimal)ConvertToDecimal(Convert.ToDouble(numberForTranslateBox.Text, CultureInfo.InvariantCulture), Convert.ToInt32(startNumberSystemBox.Text));
-                string result = ConvertFromDecimal(decimalNumber, Convert.ToInt32(endNumberSystemBox.Text));
-                resultBox.Text = DelZero(result);
-                translateCountLabel.Text = (Int32.Parse(translateCountLabel.Text) + 1).ToString();
-                UpdateUserInfo(translateCountLabel.Text, profileEditCount.Text, warningsCount.Text, _currentUser);
-                ConvertToBinary((int)decimalNumber, Convert.ToInt32(endNumberSystemBox.Text));
-                UpdateLogInfo("Было переведено число " + numberForTranslateBox.Text + " из " + startNumberSystemBox.Text + " в " + endNumberSystemBox.Text, _currentUser);
+                int countSymb = numberForTranslateBox.Text.Length - numberForTranslateBox.Text.IndexOf(".") - 1;
+                if (countSymb > 6)
+                {
+                    symbolCountError.Visible = true;
+                    resultBox.Text = string.Empty;
+                    return;
+                }
+                try
+                {
+                    decimal decimalNumber = (decimal)ConvertToDecimal(Convert.ToDouble(numberForTranslateBox.Text, CultureInfo.InvariantCulture), Convert.ToInt32(startNumberSystemBox.Text));
+                    string result = ConvertFromDecimal(decimalNumber, Convert.ToInt32(endNumberSystemBox.Text));
+                    resultBox.Text = DelZero(result);
+                    translateCountLabel.Text = (Int32.Parse(translateCountLabel.Text) + 1).ToString();
+                    UpdateUserInfo(translateCountLabel.Text, profileEditCount.Text, warningsCount.Text, _currentUser);
+                    ConvertToBinary((int)decimalNumber, Convert.ToInt32(endNumberSystemBox.Text));
+                    UpdateLogInfo("Было переведено число " + numberForTranslateBox.Text + " из " + startNumberSystemBox.Text + " в " + endNumberSystemBox.Text, _currentUser);
+                }
+                catch (Exception)
+                {
+                    label21.Visible = true;
+                }
             }
-            catch (Exception)
+            else
             {
-                label21.Visible = true;
+                try
+                {
+                    decimal decimalNumber = (decimal)ConvertToDecimal(Convert.ToDouble(numberForTranslateBox.Text, CultureInfo.InvariantCulture), Convert.ToInt32(startNumberSystemBox.Text));
+                    string result = ConvertFromDecimal(decimalNumber, Convert.ToInt32(endNumberSystemBox.Text));
+                    resultBox.Text = DelZero(result);
+                    translateCountLabel.Text = (Int32.Parse(translateCountLabel.Text) + 1).ToString();
+                    UpdateUserInfo(translateCountLabel.Text, profileEditCount.Text, warningsCount.Text, _currentUser);
+                    ConvertToBinary((int)decimalNumber, Convert.ToInt32(endNumberSystemBox.Text));
+                    UpdateLogInfo("Было переведено число " + numberForTranslateBox.Text + " из " + startNumberSystemBox.Text + " в " + endNumberSystemBox.Text, _currentUser);
+                }
+                catch (Exception)
+                {
+                    label21.Visible = true;
+                }
             }
         }
 
