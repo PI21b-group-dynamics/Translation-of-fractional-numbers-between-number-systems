@@ -41,3 +41,18 @@ D:\4. Universe\Групповая Динамика\Translation-of-fractional-num
 D:\4. Universe\Групповая Динамика\Translation-of-fractional-numbers-between-number-systems\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation_of_fractional_numbers.DefaultUserMainForm.resources
 D:\4. Universe\Групповая Динамика\Translation-of-fractional-numbers-between-number-systems\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation_of_fractional_numbers.ProfileEditForm.resources
 D:\4. Universe\Групповая Динамика\Translation-of-fractional-numbers-between-number-systems\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation_numbers.RegistrationForm.resources
+C:\Users\provc\source\repos\Trans\Translation-of-fractional-numbers\Translation-of-fractional-numbers\bin\Debug\Translation-of-fractional-numbers.exe.config
+C:\Users\provc\source\repos\Trans\Translation-of-fractional-numbers\Translation-of-fractional-numbers\bin\Debug\Translation-of-fractional-numbers.exe
+C:\Users\provc\source\repos\Trans\Translation-of-fractional-numbers\Translation-of-fractional-numbers\bin\Debug\Translation-of-fractional-numbers.pdb
+C:\Users\provc\source\repos\Trans\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation-of-fractional-numbers.csproj.AssemblyReference.cache
+C:\Users\provc\source\repos\Trans\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation-of-fractional-numbers.csproj.SuggestedBindingRedirects.cache
+C:\Users\provc\source\repos\Trans\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation_of_fractional_numbers.AdministratorMainForm.resources
+C:\Users\provc\source\repos\Trans\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation_numbers.AuthForm.resources
+C:\Users\provc\source\repos\Trans\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation_of_fractional_numbers.DefaultUserMainForm.resources
+C:\Users\provc\source\repos\Trans\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation_of_fractional_numbers.ProfileEditForm.resources
+C:\Users\provc\source\repos\Trans\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation_of_fractional_numbers.Properties.Resources.resources
+C:\Users\provc\source\repos\Trans\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation_numbers.RegistrationForm.resources
+C:\Users\provc\source\repos\Trans\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation-of-fractional-numbers.csproj.GenerateResource.cache
+C:\Users\provc\source\repos\Trans\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation-of-fractional-numbers.csproj.CoreCompileInputs.cache
+C:\Users\provc\source\repos\Trans\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation-of-fractional-numbers.exe
+C:\Users\provc\source\repos\Trans\Translation-of-fractional-numbers\Translation-of-fractional-numbers\obj\Debug\Translation-of-fractional-numbers.pdb

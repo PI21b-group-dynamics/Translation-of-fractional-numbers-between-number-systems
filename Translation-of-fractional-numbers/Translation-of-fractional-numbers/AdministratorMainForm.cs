@@ -120,7 +120,7 @@ namespace Translation_of_fractional_numbers
                 profileEditCount.Text = sr.ReadLine();
                 warningsCount.Text = sr.ReadLine();
             }
-            
+
             using (StreamReader sr = new StreamReader($"Users\\{userLogin}.txt"))
             {
                 userLoginBox.Text = sr.ReadLine();
@@ -160,7 +160,7 @@ namespace Translation_of_fractional_numbers
         {
             if (_currentUser == "admin")
                 MessageBox.Show("Главный администратор не может редактировать свои данные", "Ошибка редактирования", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            
+
             string messageToLog = "AdminEditLogs";
             new ProfileEditForm(userLoginBox.Text, userPasswordBox.Text, userNameBox.Text, userSurnameBox.Text, true).ShowDialog();
             profileEditCount.Text = (Int32.Parse(warningsCount.Text) + 1).ToString();
@@ -171,7 +171,7 @@ namespace Translation_of_fractional_numbers
             UpdateLogInfo("Логин", userLoginBox.Text, messageToLog);
             UpdateLogInfo("Пароль", userPasswordBox.Text, messageToLog);
         }
-        
+
         private void UpdateLogInfo(string message, string dataToLog, string user)
         {
             DateTime time;
@@ -181,7 +181,7 @@ namespace Translation_of_fractional_numbers
                 sw.WriteLine($"{message} - {dataToLog}: {time.ToShortTimeString()}\n");
             }
         }
-        
+
         private void numberForTranslateBox_TextChanged(object sender, EventArgs e)
         {
             if (startNumberSystemBox.ForeColor == Color.Gray || endNumberSystemBox.ForeColor == Color.Gray || numberForTranslateBox.Text == "")
@@ -433,7 +433,7 @@ namespace Translation_of_fractional_numbers
             binary = binary.PadLeft(8, '0');
             string inverted = new string(binary.Select(b => b == '1' ? '0' : '1').ToArray());
             string direct = binary;
-            
+
             inverted = ConvertFromDecimal(((decimal)ConvertToDecimal(Convert.ToDouble(inverted), 2)), baseNumber);
             direct = ConvertFromDecimal(((decimal)ConvertToDecimal(Convert.ToDouble(direct), 2)), baseNumber);
             binaryTextBox.Text = DelZero(direct);
@@ -598,17 +598,17 @@ namespace Translation_of_fractional_numbers
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                
+
                 deleteButton.Enabled = true;
                 // получаем имя пользователя из выбранной строки dataGridView
                 string username = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
                 string messageToLog = $"Был удален пользователь под следующим именем";
-                UpdateLogInfo( messageToLog + " " + username, _currentUser);
+                UpdateLogInfo(messageToLog + " " + username, _currentUser);
                 // вызываем функцию для удаления пользователя
                 DeleteUser(username);
             }
         }
-      
+
         private void DeleteUser(string username)
         {
             string userFilePath = $"Users\\{username}.txt";
@@ -633,7 +633,7 @@ namespace Translation_of_fractional_numbers
         {
             DeleteSelectedUser();
         }
-        
+
         private void UpdateLogInfo(string messageToLog, string user)
         {
             DateTime time;
@@ -679,7 +679,20 @@ namespace Translation_of_fractional_numbers
 
         private void textBox_TextChanged(object sender, EventArgs e)
         {
-            _dataTable.DefaultView.RowFilter = string.Format("{0} LIKE '%{1}%'", comboBox.SelectedItem, textBox.Text);
+            if (textBox.Text == "")
+            {
+                _dataTable.DefaultView.RowFilter = null;
+                return;
+            }
+
+            try
+            {
+                _dataTable.DefaultView.RowFilter = string.Format("{0} LIKE '%{1}%'", comboBox.SelectedItem, textBox.Text);
+            }
+            catch
+            {
+                _dataTable.DefaultView.RowFilter = string.Format("[{0}] = '{1}'", comboBox.SelectedItem, textBox.Text);
+            }
         }
     }
 }
