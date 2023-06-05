@@ -694,5 +694,21 @@ namespace Translation_of_fractional_numbers
                 _dataTable.DefaultView.RowFilter = string.Format("[{0}] = '{1}'", comboBox.SelectedItem, textBox.Text);
             }
         }
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            string fileName = "help.txt";
+            if (!File.Exists(fileName))
+            {
+                // Если файл не существует, создаем его
+                using (StreamWriter sw = File.CreateText(fileName))
+                {
+                    sw.WriteLine("Справочный материал о программе.\n");
+                }
+            }
+            // Открываем файл в программе по умолчанию
+            Process.Start(fileName);
+        }
     }
+    
 }

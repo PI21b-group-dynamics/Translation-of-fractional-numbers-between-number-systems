@@ -475,5 +475,25 @@ namespace Translation_of_fractional_numbers
                 sw.Write($"{messageToLog} ; {time.ToShortTimeString()}\n");
             }
         }
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            string fileName = "help.txt";
+            if (File.Exists(fileName))
+            {
+                // Если файл существует, открываем его только для чтения
+                using (StreamReader sr = new StreamReader(fileName))
+                {
+                    // Читаем содержимое файла и выводим его в MessageBox
+                    string fileContent = sr.ReadToEnd();
+                    MessageBox.Show(fileContent);
+                }
+            }
+            else
+            {
+                // Если файл не существует, выводим сообщение об ошибке
+                MessageBox.Show("Файл не найден!");
+            }
+        }
     }
 }
